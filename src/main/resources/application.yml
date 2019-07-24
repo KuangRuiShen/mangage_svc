@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring : 
+  #数据库配置 
+  datasource :      
+    url : jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
+    username : root
+    password : root
+    driver-class-name : com.mysql.jdbc.Driver
+    
+  application:
+    name: soc
+  mvc: 
+      throw-exception-if-no-handler-found : true
+  resources : 
+      add-mappings : false
+      
+         
+#mybatis配置
+mybatis-plus: 
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
+  typeAliasesPackage :  com.main.page.entity.*
+
+logging:
+  level:
+     com.main.page.mapper : debug
+  
