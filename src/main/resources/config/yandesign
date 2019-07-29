@@ -1,0 +1,53 @@
+#!/bin/bash
+#chkconfig:2345 20 90
+#description:zookeeper
+#processname:zookeeper
+
+cd /usr/local/yandesign
+DIR=/usr/local/yandesign
+JAR_NAME="yandesign.jar"
+JAVA_HOME="/usr/java/jdk1.8.0_25/bin"
+LOG_DIR=$DIR/logs
+
+start(){
+   ${JAVA_HOME}/java -Dfile.encoding=UTF-8 -jar ${JAR_NAME}  >> ${LOG_DIR}/info.log & 
+ echo -e "\033[33m staring $JAR_NAME ... 启动中....\033[0m"
+}
+
+#停止方法
+stop(){
+  ps -ef|grep $JAR_NAME |grep -v grep |awk '{print $2}'  | sed -e "s/^/kill -9 /g" | sh - 
+  echo -e "\033[31m stopping $JAR_NAME ... \033[0m"
+}
+#输出运行状态
+log(){
+ #is_exist
+  tail -f ${LOG_DIR}/info.log
+ 
+}
+
+#重启
+restart(){
+ stop
+ start
+}
+
+
+#根据输入参数，选择执行对应方法，不输入则执行使用说明
+case "$1" in
+ "start")
+ start
+ ;;
+ "stop")
+ stop
+ ;;
+ "log")
+ log
+ ;;
+ "restart")
+ restart
+ ;;
+ *)
+ usage
+ ;;
+esac

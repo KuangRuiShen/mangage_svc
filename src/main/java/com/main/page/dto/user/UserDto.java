@@ -1,25 +1,19 @@
-package com.main.page.entity.user;
+package com.main.page.dto.user;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
+//登录用户
+public class UserDto {
 
-@TableName("user")
-public class User {
-	
-	@TableId(type=IdType.AUTO)
 	private Integer id;
 	
 	private String username;
 	
 	private String password;
 	
-	private String name;
-	
-	@TableField(exist=false)
 	private String lastpassword;
+	
+	private String remark;
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -44,12 +38,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getLastpassword() {
@@ -59,9 +53,7 @@ public class User {
 	public void setLastpassword(String lastpassword) {
 		this.lastpassword = lastpassword;
 	}
-	
-	
-	
-	
 
+
+	
 }

@@ -4,10 +4,9 @@ spring :
     url : jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
     username : root
     password : root
-    driver-class-name : com.mysql.jdbc.Driver
-    
+    driver-class-name : com.mysql.jdbc.Driver  
   application:
-    name: soc
+    name: yandesign
   mvc: 
       throw-exception-if-no-handler-found : true
   resources : 
