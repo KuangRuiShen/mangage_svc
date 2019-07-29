@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +42,7 @@ public class FileUploadController {
 //	@Value("${ip}")
 	private String ip="94.191.18.52";
 	
-	@Value("${realpath}")
+//	@Value("${realpath}")
 	private String realpath="/usr/local/yandesign";
 	
 //	@Autowired
