@@ -11,6 +11,4 @@ import com.main.page.entity.product.Product;
  */
 public interface ProductService extends IService<Product> {
 
-	void saveVideourl(String id, String path);
-
 }

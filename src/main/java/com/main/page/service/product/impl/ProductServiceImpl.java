@@ -16,10 +16,5 @@ import com.main.page.service.product.ProductService;
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> implements ProductService{
 
-	@Override
-	public void saveVideourl(String id, String path) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

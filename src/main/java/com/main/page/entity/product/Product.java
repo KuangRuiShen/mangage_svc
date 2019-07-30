@@ -18,7 +18,9 @@ public class Product {
 	
 	private String title;//产品主题
 	
-	private String fileUrl;//主题图片
+	private String imgurl;//主题图片
+	
+	private String videourl;//文件url
 	
 	private String remark;//文字说明
 
@@ -38,12 +40,14 @@ public class Product {
 		this.title = title;
 	}
 
-	public String getFileUrl() {
-		return fileUrl;
+	
+
+	public String getImgurl() {
+		return imgurl;
 	}
 
-	public void setFileUrl(String fileUrl) {
-		this.fileUrl = fileUrl;
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
 	}
 
 	public String getRemark() {
@@ -53,6 +57,16 @@ public class Product {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public String getVideourl() {
+		return videourl;
+	}
+
+	public void setVideourl(String videourl) {
+		this.videourl = videourl;
+	}
+	
+	
 	
 	
 
