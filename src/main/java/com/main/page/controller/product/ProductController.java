@@ -2,6 +2,7 @@ package com.main.page.controller.product;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import com.main.page.entity.product.Product;
 import com.main.page.service.product.ProductService;
 import com.main.page.utils.JsonResult;
@@ -29,11 +33,21 @@ public class ProductController {
 	
 	
 	@GetMapping("/query")
-	public JsonResult<?> query(@RequestBody Product p){		
+	public JsonResult<?> query(int page,int pageSize,String name){		
 		try {		
-			productService.insert(p);
-			return JsonResult.buildSuccessResult();		
-				
+			if(pageSize == 0){
+				pageSize = JsonResult.PAGESIZR;
+			}			
+			Page<Product> p = new Page<Product>(page, pageSize);
+			PageHelper.setPagination(p);
+			EntityWrapper<Product> ew = new EntityWrapper<>();
+			if(StringUtils.isNotBlank(name)){
+				ew.like("name", name);
+			}
+			List<Product> list = productService.selectList(ew);
+			p.setRecords(list);
+			p.setTotal(PageHelper.freeTotal());
+			return JsonResult.buildSuccessResult(p.getRecords(),p.getTotal());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
