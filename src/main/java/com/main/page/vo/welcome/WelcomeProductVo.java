@@ -1,20 +1,10 @@
-package com.main.page.entity.product;
+package com.main.page.vo.welcome;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
-
-/**
- * @author krs
- * @time 2019年7月29日 下午3:22:58
- * @describe 产品
- * 
- */
-@TableName("product")
-public class Product {
+public class WelcomeProductVo {
 	
-	@TableId(type=IdType.AUTO)
 	private String id;
+	
+	private String productId;
 	
 	private String title;//产品主题
 	
@@ -34,6 +24,14 @@ public class Product {
 		this.id = id;
 	}
 
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -42,22 +40,12 @@ public class Product {
 		this.title = title;
 	}
 
-	
-
 	public String getImgurl() {
 		return imgurl;
 	}
 
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 
 	public String getVideourl() {
@@ -68,6 +56,14 @@ public class Product {
 		this.videourl = videourl;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public Integer getSerial() {
 		return serial;
 	}
@@ -75,8 +71,6 @@ public class Product {
 	public void setSerial(Integer serial) {
 		this.serial = serial;
 	}
-
-
 	
-
+	
 }

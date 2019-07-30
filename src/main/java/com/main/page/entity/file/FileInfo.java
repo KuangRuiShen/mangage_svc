@@ -2,6 +2,7 @@ package com.main.page.entity.file;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
@@ -14,8 +15,10 @@ public class FileInfo {
 
 	private String id;
 	
+	@TableField("file_url")
 	private String fileUrl;
 	
+	@TableField("create_date")
 	private Date createDate;
 
 	public String getId() {
@@ -49,9 +52,8 @@ public class FileInfo {
 		this.createDate = new Date();
 	}
 
-	public FileInfo(Date createDate) {
+	public FileInfo( ) {
 		super();
-		this.createDate = createDate;
 	}
 
 	

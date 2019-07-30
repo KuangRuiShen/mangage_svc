@@ -1,19 +1,9 @@
-package com.main.page.entity.product;
+package com.main.page.vo.product;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
+import java.util.List;
 
-/**
- * @author krs
- * @time 2019年7月29日 下午3:22:58
- * @describe 产品
- * 
- */
-@TableName("product")
-public class Product {
+public class ProductVo {
 	
-	@TableId(type=IdType.AUTO)
 	private String id;
 	
 	private String title;//产品主题
@@ -25,6 +15,8 @@ public class Product {
 	private String remark;//文字说明
 	
 	private Integer serial;//序号
+	
+	private List<String> imgs;
 
 	public String getId() {
 		return id;
@@ -42,7 +34,6 @@ public class Product {
 		this.title = title;
 	}
 
-	
 
 	public String getImgurl() {
 		return imgurl;
@@ -76,7 +67,13 @@ public class Product {
 		this.serial = serial;
 	}
 
+	public List<String> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<String> imgs) {
+		this.imgs = imgs;
+	}
 
 	
-
 }
