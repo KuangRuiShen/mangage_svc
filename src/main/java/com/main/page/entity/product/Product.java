@@ -1,5 +1,8 @@
 package com.main.page.entity.product;
 
+import java.util.List;
+
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -25,6 +28,9 @@ public class Product {
 	private String remark;//文字说明
 	
 	private Integer serial;//序号
+	
+	@TableField(exist=false)
+	private List<String> imgs;
 
 	public String getId() {
 		return id;
@@ -74,6 +80,14 @@ public class Product {
 
 	public void setSerial(Integer serial) {
 		this.serial = serial;
+	}
+
+	public List<String> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<String> imgs) {
+		this.imgs = imgs;
 	}
 
 

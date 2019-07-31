@@ -33,7 +33,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 		// 删除旧的
 		if (StringUtils.isNotBlank(dto.getId())) {
 			EntityWrapper<ProductImags> ew = new EntityWrapper<>();
-			ew.eq("prodcut_id", dto.getId());
+			ew.eq("product_id", dto.getId());
 			productImgMapper.delete(ew);
 
 			List<String> imags = dto.getImgs();

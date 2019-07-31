@@ -77,6 +77,12 @@ public class ProductController {
 	public JsonResult<?> insert(@RequestBody Product p) {
 		try {
 			productService.insert(p);
+			//保存小图片
+			ProductImageDto dto = new ProductImageDto();
+			dto.setId(p.getId());
+			dto.setImgs(p.getImgs());
+			productService.insertImages(dto);
+			
 			return JsonResult.buildSuccessResult();
 
 		} catch (Exception e) {
@@ -107,16 +113,16 @@ public class ProductController {
 		}
 	}
 
-	@PostMapping("/images")
-	public JsonResult<?> images(@RequestBody ProductImageDto dto) {
-		try {
-			productService.insertImages(dto);
-			return JsonResult.buildSuccessResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "系统异常");
-		}
-	}
+//	@PostMapping("/images")
+//	public JsonResult<?> images(@RequestBody ProductImageDto dto) {
+//		try {
+//			productService.insertImages(dto);
+//			return JsonResult.buildSuccessResult();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "系统异常");
+//		}
+//	}
 
 	@GetMapping("/images")
 	public JsonResult<?> getImages(@RequestParam String id) {
