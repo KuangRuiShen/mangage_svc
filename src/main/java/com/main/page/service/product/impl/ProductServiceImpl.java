@@ -49,7 +49,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 	@Override
 	public List<String> queryImages(String id) {
 		EntityWrapper<ProductImags> ew = new EntityWrapper<>();
-		ew.eq("prodcut_id", id);
+		ew.eq("product_id", id);
 		List<ProductImags> pi = productImgMapper.selectList(ew);
 		return pi.stream().map(ProductImags::getImgurl).collect(Collectors.toList());
 	}
