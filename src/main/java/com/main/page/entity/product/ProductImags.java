@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 @TableName("product_image")
 public class ProductImags {
 	
-	@TableField("prodcut_id")
+	@TableField("product_id")
 	private String 	prodcutId;
 	
 	@TableField("imgurl")

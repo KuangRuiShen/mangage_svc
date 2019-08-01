@@ -61,9 +61,10 @@ public class ProductController {
 	@GetMapping("/queryOne")
 	public JsonResult<?> queryOne(@RequestParam String id) {
 		try {
-			ProductVo vo = new ProductVo();
+			ProductVo vo = null;
 			Product p = productService.selectById(id);
 			if(p!=null){
+				vo = new ProductVo();
 				BeanUtils.copyProperties(p, vo);
 				List<String> ids = productService.queryImages(id);
 				vo.setImgs(ids);
