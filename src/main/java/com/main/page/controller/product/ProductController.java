@@ -63,9 +63,11 @@ public class ProductController {
 		try {
 			ProductVo vo = new ProductVo();
 			Product p = productService.selectById(id);
-			BeanUtils.copyProperties(p, vo);
-			List<String> ids = productService.queryImages(id);
-			vo.setImgs(ids);
+			if(p!=null){
+				BeanUtils.copyProperties(p, vo);
+				List<String> ids = productService.queryImages(id);
+				vo.setImgs(ids);
+			}						
 			return JsonResult.buildSuccessResult(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
