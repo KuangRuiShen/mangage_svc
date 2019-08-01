@@ -1,5 +1,6 @@
 package com.main.page.entity.product;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -25,6 +26,8 @@ public class Product {
 	private String remark;//文字说明
 	
 	private Integer serial;//序号
+	@TableField("type_id")
+	private String typeId;
 
 
 	public String getId() {
@@ -44,6 +47,15 @@ public class Product {
 	}
 
 	
+	
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
 
 	public String getImgurl() {
 		return imgurl;

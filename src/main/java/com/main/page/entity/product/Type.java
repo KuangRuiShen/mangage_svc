@@ -1,0 +1,56 @@
+package com.main.page.entity.product;
+
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
+@TableName("type")
+public class Type {
+	
+	@TableId(type=IdType.AUTO)
+	private Integer id;
+	
+	private String name;
+	
+	private String imgurl;
+	
+	private Integer px;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public Integer getPx() {
+		return px;
+	}
+
+	public void setPx(Integer px) {
+		this.px = px;
+	}
+	
+	
+	
+	
+	
+
+}
