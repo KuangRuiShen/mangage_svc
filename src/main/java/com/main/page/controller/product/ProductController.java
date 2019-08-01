@@ -77,15 +77,16 @@ public class ProductController {
 	}
 
 	@PostMapping("/insert")
-	public JsonResult<?> insert(@RequestBody Product p) {
+	public JsonResult<?> insert(@RequestBody ProductVo vo) {
 		try {
+			Product p = new Product();
+			BeanUtils.copyProperties(vo, p);
 			productService.insert(p);
 			//保存小图片
 			ProductImageDto dto = new ProductImageDto();
 			dto.setId(p.getId());
-			dto.setImgs(p.getImgs());
-			productService.insertImages(dto);
-			
+			dto.setImgs(vo.getImgs());
+			productService.insertImages(dto);			
 			return JsonResult.buildSuccessResult();
 
 		} catch (Exception e) {
