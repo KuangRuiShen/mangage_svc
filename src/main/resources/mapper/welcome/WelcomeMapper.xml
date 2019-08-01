@@ -22,5 +22,6 @@
 				p.title like  CONCAT('%',#{name},'%')
 			</if>
 		</where>
+		order by t.`order`
 	</select>
 </mapper>

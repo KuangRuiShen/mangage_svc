@@ -36,7 +36,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/query")
-	public JsonResult<?> query(int page, int pageSize, String name) {
+	public JsonResult<?> query(@RequestParam int page, @RequestParam int pageSize, String name) {
 		try {
 			if (pageSize == 0) {
 				pageSize = JsonResult.PAGESIZR;
