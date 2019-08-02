@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -84,8 +83,8 @@ public class FileUploadController {
 
 	@PostMapping(value = "/video")
 	public void video(MultipartFile file, HttpServletRequest request, @RequestParam Map<String, Object> param) {
-		Map<String, Object> result = new HashMap<>();
-		result.put("code", 201);
+//		Map<String, Object> result = new HashMap<>();
+//		result.put("code", 201);
 		// System.out.println(param.toString());
 		Integer chunks = Integer.parseInt(param.get("chuckSize").toString());
 		String fileName = param.get("fileName").toString();
@@ -143,6 +142,9 @@ public class FileUploadController {
 					String fileUrl = "http://" + ip + "/upload/video/" + newFilename;
 					FileInfo fileInfo = new FileInfo(id, fileUrl);
 					fileService.insert(fileInfo);
+					//删除
+					MyFileUtil.delFolder(realpath + "/upload/video/tmp/" + id + "/");
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -168,11 +170,6 @@ public class FileUploadController {
 		// return result;
 	}
 
-	@GetMapping("/file")
-	public void delete(String id) {
-		// 删除目录下的文件
-		MyFileUtil.delFolder(realpath + "/upload/video/tmp/" + id + "/");
-	}
 
 	@GetMapping("/getpreurl")
 	public JsonResult<?> getpreurl() {
