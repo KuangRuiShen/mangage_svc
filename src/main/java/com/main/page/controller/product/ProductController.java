@@ -45,7 +45,7 @@ public class ProductController {
 			PageHelper.setPagination(p);
 			EntityWrapper<Product> ew = new EntityWrapper<>();
 			if (StringUtils.isNotBlank(name)) {
-				ew.like("name", name);
+				ew.like("title", name);
 			}
 			ew.orderBy("serial", false);
 			List<Product> list = productService.selectList(ew);
