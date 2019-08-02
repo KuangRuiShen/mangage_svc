@@ -1,17 +1,18 @@
 package com.main.page.controller.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.main.page.dto.user.UserDto;
 import com.main.page.entity.user.User;
-import com.main.page.service.user.UserService;
 import com.main.page.utils.JsonResult;
-import com.main.page.utils.MD5;
 import com.main.page.utils.ResultCode;
 
 /**
@@ -23,25 +24,23 @@ import com.main.page.utils.ResultCode;
 @RequestMapping
 public class LoginController {
 
-	@Autowired
-	private UserService userService;
-
 	// 修改密码
 	@PostMapping("/login")
-	public JsonResult<?> updatework(@RequestBody UserDto u) {
+	public JsonResult<?> updatework(@RequestBody UserDto u, HttpSession session) {
 		try {
-			EntityWrapper<User> ew = new EntityWrapper<>();
-			ew.eq("username", u.getUsername());
-			User user = userService.selectOne(ew);
-			if (user != null) {
-				if (user.getPassword().equals(MD5.enc(u.getPassword()))) {
-					return JsonResult.buildSuccessResult(user);
-				}
+			UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(u.getUsername(), u.getPassword());
+			Subject subject = SecurityUtils.getSubject();
+			// 完成登录
+			subject.login(usernamePasswordToken);
+			if (subject.isAuthenticated()) {
+				User user = (User) subject.getPrincipal();
+				// 存入session
+				session.setAttribute("user", user);
+				return JsonResult.buildSuccessResult(user);
 			}
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
 		} catch (Exception e) {
-			e.printStackTrace();
-			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "系统异常");
+			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
 		}
 	}
 
