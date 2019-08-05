@@ -40,6 +40,7 @@ public class LoginController {
 			}
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
 		} catch (Exception e) {
+			e.printStackTrace();
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
 		}
 	}

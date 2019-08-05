@@ -36,7 +36,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/query")
-	public JsonResult<?> query(@RequestParam int page, @RequestParam int pageSize, String name) {
+	public JsonResult<?> query(@RequestParam int page, @RequestParam int pageSize, String name,String typeId) {
 		try {
 			if (pageSize == 0) {
 				pageSize = JsonResult.PAGESIZR;
@@ -46,6 +46,9 @@ public class ProductController {
 			EntityWrapper<Product> ew = new EntityWrapper<>();
 			if (StringUtils.isNotBlank(name)) {
 				ew.like("title", name);
+			}
+			if (StringUtils.isNotBlank(typeId)) {
+				ew.eq("type_id", typeId);
 			}
 			ew.orderBy("serial", false);
 			List<Product> list = productService.selectList(ew);

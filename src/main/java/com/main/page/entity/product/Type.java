@@ -14,6 +14,8 @@ public class Type {
 	
 	private String imgurl;
 	
+	private String remark;
+	
 	private Integer px;
 
 	public Integer getId() {
@@ -46,6 +48,14 @@ public class Type {
 
 	public void setPx(Integer px) {
 		this.px = px;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	
