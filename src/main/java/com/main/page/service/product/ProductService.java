@@ -1,6 +1,7 @@
 package com.main.page.service.product;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.main.page.dto.product.ProductImageDto;
@@ -17,5 +18,7 @@ public interface ProductService extends IService<Product> {
 	void insertImages(ProductImageDto dto);
 
 	List<String> queryImages(String id);
+
+	Map<String, Object> menu();
 
 }

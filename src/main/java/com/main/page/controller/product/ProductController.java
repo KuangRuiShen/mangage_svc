@@ -61,23 +61,7 @@ public class ProductController {
 		}
 	}
 
-	@GetMapping("/queryOne")
-	public JsonResult<?> queryOne(@RequestParam String id) {
-		try {
-			ProductVo vo = null;
-			Product p = productService.selectById(id);
-			if(p!=null){
-				vo = new ProductVo();
-				BeanUtils.copyProperties(p, vo);
-				List<String> ids = productService.queryImages(id);
-				vo.setImgs(ids);
-			}						
-			return JsonResult.buildSuccessResult(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "系统异常");
-		}
-	}
+	
 
 	@PostMapping("/insert")
 	public JsonResult<?> insert(@RequestBody ProductVo vo) {

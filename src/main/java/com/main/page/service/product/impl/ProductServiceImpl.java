@@ -1,6 +1,8 @@
 package com.main.page.service.product.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +54,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 		ew.eq("product_id", id);
 		List<ProductImags> pi = productImgMapper.selectList(ew);
 		return pi.stream().map(ProductImags::getImgurl).collect(Collectors.toList());
+	}
+
+	@Override
+	public Map<String, Object> menu() {
+//		String[] menus = 
+		Map<String,Object> menus = new HashMap<>();
+		return menus;
 	}
 
 }
