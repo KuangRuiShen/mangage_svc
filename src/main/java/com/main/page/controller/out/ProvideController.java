@@ -44,7 +44,7 @@ public class ProvideController {
 	@GetMapping("/product/menu")
 	public JsonResult<?> menu( ) {
 		try {
-			 Map<String,Object> result = productService.menu();
+			List<Map<String, Object>> result = productService.menu();
 			return JsonResult.buildSuccessResult(result);
 		} catch (Exception e) {
 			e.printStackTrace();

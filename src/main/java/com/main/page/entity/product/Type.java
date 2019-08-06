@@ -17,7 +17,10 @@ public class Type {
 	private String remark;
 	
 	private Integer px;
-
+	
+	private String menuId;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,10 +60,14 @@ public class Type {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	
-	
-	
+
+	public String getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(String menuId) {
+		this.menuId = menuId;
+	}
 	
 
 }

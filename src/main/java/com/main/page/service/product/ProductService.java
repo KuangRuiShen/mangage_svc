@@ -19,6 +19,6 @@ public interface ProductService extends IService<Product> {
 
 	List<String> queryImages(String id);
 
-	Map<String, Object> menu();
+	List<Map<String, Object>> menu();
 
 }

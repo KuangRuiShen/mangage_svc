@@ -4,15 +4,17 @@ import java.util.List;
 
 public class ProductImageDto {
 	
-	private String id;
+	private Integer id;
 	
 	private List<String> imgs;
 
-	public String getId() {
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

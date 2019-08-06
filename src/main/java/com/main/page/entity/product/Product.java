@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.enums.IdType;
 public class Product {
 	
 	@TableId(type=IdType.AUTO)
-	private String id;
+	private Integer id;
 	
 	private String title;//产品主题
 	
@@ -30,11 +30,12 @@ public class Product {
 	private String typeId;
 
 
-	public String getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
