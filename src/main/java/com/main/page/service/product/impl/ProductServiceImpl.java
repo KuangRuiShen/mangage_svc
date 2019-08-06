@@ -99,12 +99,16 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 				myMenu.put("zlist", list);
 			} else if (types.size() == 1) {
 				Type t = types.get(0);
+				myMenu.put("logo", t.getLogo());
 				myMenu.put("imgurl", t.getImgurl());
 				List<ItemVo> items = getProduct(t.getId());
 				if (items.size() > 0) {
 					myMenu.put("list", items);
 				}
-
+				//如果是观
+				if("观".equals(u.getTitle())){
+					myMenu.put("cover", t.getCover());
+				}
 			}
 			result.add(myMenu);
 		}

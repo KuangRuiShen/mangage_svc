@@ -14,6 +14,10 @@ public class Type {
 	
 	private String imgurl;
 	
+	private String logo;//logo
+	
+	private String cover;//封面
+	
 	private String remark;
 	
 	private Integer px;
@@ -68,6 +72,22 @@ public class Type {
 	public void setMenuId(String menuId) {
 		this.menuId = menuId;
 	}
-	
 
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	
+	
 }
