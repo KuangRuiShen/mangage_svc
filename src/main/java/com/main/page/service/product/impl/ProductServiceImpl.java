@@ -91,8 +91,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 				for (int i = 0; i < types.size(); i++) {
 					Type t = types.get(i);
 					zmenu = new LinkedHashMap<>();
+					zmenu.put("id", t.getId());
 					zmenu.put("title", t.getName());
-					if (i == 0) {
+					if ("集".equals(t.getName())){
 						// 特殊处理
 						List<ItemVo> items = getProduct(baseList,t.getId());
 						Map<String, ItemVo> map = items.stream()
@@ -107,6 +108,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
 			} else if (types.size() == 1) {
 				Type t = types.get(0);
+				myMenu.put("id", t.getId());
 				myMenu.put("logo", t.getLogo());
 				myMenu.put("imgurl", t.getImgurl());
 				// 如果是观
