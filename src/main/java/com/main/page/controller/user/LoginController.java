@@ -33,13 +33,12 @@ public class LoginController {
 		try {
 			User u = new User();
 			u.setUsername(dto.getUsername());
-			User user = userMapper.selectOne(u);
-
+			u = userMapper.selectOne(u);
 			if (u != null && dto.getPassword() != null) {
 				// 存入session
-				session.setAttribute("user", user);
+				session.setAttribute("user", u);
 				if (u.getPassword().equals(MD5.enc(dto.getPassword()))) {
-					return JsonResult.buildSuccessResult(user);
+					return JsonResult.buildSuccessResult(u);
 				}
 			}
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
