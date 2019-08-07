@@ -44,7 +44,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 	@Override
 	public void insertImages(ProductImageDto dto) {
 		// 删除旧的
-		if (StringUtils.isNotEmpty(dto.getId()+"")) {
+		if (StringUtils.isNotEmpty(dto.getId() + "")) {
 			EntityWrapper<ProductImags> ew = new EntityWrapper<>();
 			ew.eq("product_id", dto.getId());
 			productImgMapper.delete(ew);
@@ -52,7 +52,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 			List<String> imags = dto.getImgs();
 			ProductImags pi = null;
 			for (String img : imags) {
-				pi = new ProductImags(dto.getId()+"", img);
+				pi = new ProductImags(dto.getId() + "", img);
 				productImgMapper.insert(pi);
 			}
 		}
@@ -70,6 +70,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 	@Override
 	public List<Map<String, Object>> menu() {
 		EntityWrapper<Menu> mew = new EntityWrapper<>();
+
+		List<Product> baseList = baseMapper.selectList(null);
+
 		mew.orderBy("px", true);
 		List<Menu> menus = menuMapper.selectList(mew);
 		List<Map<String, Object>> result = new ArrayList<>();
@@ -84,30 +87,34 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 			List<Type> types = typeMapper.selectList(tEw);
 			// 集
 			if (types.size() == 2) {
-				List<Object> list = new ArrayList<Object>();
-				for (Type t : types) {
-					Map<String, Object> zmenu = new LinkedHashMap<>();
+				Map<String, Object> zmenu = null;
+				for (int i = 0; i < types.size(); i++) {
+					Type t = types.get(i);
+					zmenu = new LinkedHashMap<>();
 					zmenu.put("title", t.getName());
-					List<ItemVo> items = getProduct(t.getId());
-					if (items.size() > 0) {
-						zmenu.put("list", items);
+					if (i == 0) {
+						// 特殊处理
+						List<ItemVo> items = getProduct(baseList,t.getId());
+						Map<String, ItemVo> map = items.stream()
+								.collect(Collectors.toMap(ItemVo::getYear, part -> part));
+						zmenu.put("list", map);
+					} else {
+						zmenu.put("list", getProduct(baseList,t.getId()));
 					}
 					zmenu.put("imgurl", t.getImgurl());
-					list.add(zmenu);
+					myMenu.put("list" + (i + 1), zmenu);
 				}
 
-				myMenu.put("zlist", list);
 			} else if (types.size() == 1) {
 				Type t = types.get(0);
 				myMenu.put("logo", t.getLogo());
 				myMenu.put("imgurl", t.getImgurl());
-				List<ItemVo> items = getProduct(t.getId());
-				if (items.size() > 0) {
-					myMenu.put("list", items);
-				}
-				//如果是观
-				if("观".equals(u.getTitle())){
+				// 如果是观
+				if ("观".equals(u.getTitle())) {
 					myMenu.put("cover", t.getCover());
+				} else {
+					List<ItemVo> items = getProduct(baseList,t.getId());
+					myMenu.put("list", items);
 				}
 			}
 			result.add(myMenu);
@@ -116,15 +123,19 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 		return result;
 	}
 
-	private List<ItemVo> getProduct(Integer integer) {
-		EntityWrapper<Product> ep = new EntityWrapper<>();
-		ep.eq("type_id", integer);
-		List<Product> product = baseMapper.selectList(ep);
+	private List<ItemVo> getProduct(List<Product> baseList, Integer typeId) {
+		List<Product> product = new ArrayList<>();
+		for (Product p : baseList) {
+			if (p.getTypeId().equals(typeId + "")) {
+				product.add(p);
+			}
+		}
 		List<ItemVo> result = product.stream().map(item -> {
 			ItemVo i = new ItemVo();
 			i.setId(item.getId());
 			i.setTitle(item.getTitle());
 			i.setImgurl(item.getImgurl());
+			i.setYear(item.getYear() + "");
 			return i;
 		}).collect(Collectors.toList());
 		return result;

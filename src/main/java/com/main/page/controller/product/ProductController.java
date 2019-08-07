@@ -36,7 +36,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/query")
-	public JsonResult<?> query(@RequestParam int page, @RequestParam int pageSize, String name,String typeId) {
+	public JsonResult<?> query(@RequestParam int page, @RequestParam int pageSize, String name,String typeId,String year) {
 		try {
 			if (pageSize == 0) {
 				pageSize = JsonResult.PAGESIZR;
@@ -49,6 +49,9 @@ public class ProductController {
 			}
 			if (StringUtils.isNotBlank(typeId)) {
 				ew.eq("type_id", typeId);
+			}
+			if (StringUtils.isNotBlank(year)) {
+				ew.eq("year", year);
 			}
 			ew.orderBy("serial", false);
 			List<Product> list = productService.selectList(ew);

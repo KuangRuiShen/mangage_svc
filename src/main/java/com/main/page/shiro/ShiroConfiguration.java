@@ -16,7 +16,6 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author krs
@@ -25,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
  * 
  */
 
-@Configuration
+//@Configuration
 public class ShiroConfiguration {
 	/**
 	 * 配置ShiroFilter

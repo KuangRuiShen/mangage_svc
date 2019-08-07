@@ -2,9 +2,7 @@ package com.main.page.controller.user;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.main.page.dto.user.UserDto;
 import com.main.page.entity.user.User;
+import com.main.page.mapper.user.UserMapper;
 import com.main.page.utils.JsonResult;
+import com.main.page.utils.MD5;
 import com.main.page.utils.ResultCode;
 
 /**
@@ -24,19 +24,23 @@ import com.main.page.utils.ResultCode;
 @RequestMapping
 public class LoginController {
 
+	@Autowired
+	private UserMapper userMapper;
+
 	// 修改密码
 	@PostMapping("/login")
-	public JsonResult<?> updatework(@RequestBody UserDto u, HttpSession session) {
+	public JsonResult<?> login(@RequestBody UserDto dto, HttpSession session) {
 		try {
-			UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(u.getUsername(), u.getPassword());
-			Subject subject = SecurityUtils.getSubject();
-			// 完成登录
-			subject.login(usernamePasswordToken);
-			if (subject.isAuthenticated()) {
-				User user = (User) subject.getPrincipal();
+			User u = new User();
+			u.setUsername(dto.getUsername());
+			User user = userMapper.selectOne(u);
+
+			if (u != null && dto.getPassword() != null) {
 				// 存入session
 				session.setAttribute("user", user);
-				return JsonResult.buildSuccessResult(user);
+				if (u.getPassword().equals(MD5.enc(dto.getPassword()))) {
+					return JsonResult.buildSuccessResult(user);
+				}
 			}
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR, "输入的用户和密码有误");
 		} catch (Exception e) {

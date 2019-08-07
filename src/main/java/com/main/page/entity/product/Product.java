@@ -28,6 +28,8 @@ public class Product {
 	private Integer serial;//序号
 	@TableField("type_id")
 	private String typeId;
+	
+	private Integer year;
 
 
 	
@@ -88,6 +90,14 @@ public class Product {
 
 	public void setSerial(Integer serial) {
 		this.serial = serial;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 
 }

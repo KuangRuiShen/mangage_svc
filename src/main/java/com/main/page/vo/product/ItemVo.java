@@ -7,6 +7,8 @@ public class ItemVo {
 	private String title;
 	
 	private String imgurl;
+	
+	private String year;
 
 	public Integer getId() {
 		return id;
@@ -41,9 +43,14 @@ public class ItemVo {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
-	
-	
-	
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
 	
 
 }
