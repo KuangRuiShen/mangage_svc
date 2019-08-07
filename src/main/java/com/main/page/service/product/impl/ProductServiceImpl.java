@@ -1,6 +1,7 @@
 package com.main.page.service.product.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,14 +94,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 					zmenu = new LinkedHashMap<>();
 					zmenu.put("id", t.getId());
 					zmenu.put("title", t.getName());
-					if ("集".equals(t.getName())){
+					if ("集".equals(t.getName())) {
 						// 特殊处理
-						List<ItemVo> items = getProduct(baseList,t.getId());
-						Map<String, ItemVo> map = items.stream()
-								.collect(Collectors.toMap(ItemVo::getYear, part -> part));
+						List<ItemVo> items = getProduct(baseList, t.getId());
+						Map<String, List<ItemVo>> map = ItemToMap(items);
 						zmenu.put("list", map);
 					} else {
-						zmenu.put("list", getProduct(baseList,t.getId()));
+						zmenu.put("list", getProduct(baseList, t.getId()));
 					}
 					zmenu.put("imgurl", t.getImgurl());
 					myMenu.put("list" + (i + 1), zmenu);
@@ -115,13 +115,29 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 				if ("观".equals(u.getTitle())) {
 					myMenu.put("cover", t.getCover());
 				} else {
-					List<ItemVo> items = getProduct(baseList,t.getId());
+					List<ItemVo> items = getProduct(baseList, t.getId());
 					myMenu.put("list", items);
 				}
 			}
 			result.add(myMenu);
 		}
 
+		return result;
+	}
+
+	private Map<String, List<ItemVo>> ItemToMap(List<ItemVo> items) {
+		Map<String, List<ItemVo>> result = new HashMap<>();
+		for (ItemVo i : items) {
+			String year = i.getYear();
+			List<ItemVo> list = null;
+			if (result.get(year) == null) {
+				list = new ArrayList<>();
+			} else {
+				list = result.get(year);
+			}
+			list.add(i);
+			result.put(year, list);
+		}
 		return result;
 	}
 
