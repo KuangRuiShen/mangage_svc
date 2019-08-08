@@ -16,6 +16,8 @@ public class ProductVo {
 	
 	private Integer serial;//序号
 	
+	private Integer year;
+	
 	private List<String> imgs;
 
 	
@@ -77,5 +79,14 @@ public class ProductVo {
 		this.imgs = imgs;
 	}
 
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	
 	
 }
