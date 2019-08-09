@@ -16,6 +16,8 @@ public class ProductVo {
 	
 	private Integer serial;//序号
 	
+	private String typeId;//id
+	
 	private Integer year;
 	
 	private List<String> imgs;
@@ -86,6 +88,16 @@ public class ProductVo {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+	
+	
 
 	
 	

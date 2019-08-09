@@ -155,7 +155,7 @@ public class FileUploadController {
 		} else {
 			try {
 				fileName = id + fileName.substring(fileName.lastIndexOf("."));
-				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realpath + "upload/video/", fileName));
+				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realpath + "/upload/video/", fileName));
 
 				String path = "http://" + ip + "/upload/video/" + fileName;
 				// 保存

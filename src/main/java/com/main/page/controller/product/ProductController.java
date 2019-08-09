@@ -86,8 +86,15 @@ public class ProductController {
 	}
 
 	@PostMapping("/update")
-	public JsonResult<?> update(@RequestBody Product p) {
+	public JsonResult<?> update(@RequestBody ProductVo vo) {
 		try {
+			Product p = new Product();
+			BeanUtils.copyProperties(vo, p);
+			//保存小图片
+			ProductImageDto dto = new ProductImageDto();
+			dto.setId(p.getId());
+			dto.setImgs(vo.getImgs());
+			productService.insertImages(dto);
 			productService.updateById(p);
 			return JsonResult.buildSuccessResult();
 		} catch (Exception e) {

@@ -49,7 +49,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 			EntityWrapper<ProductImags> ew = new EntityWrapper<>();
 			ew.eq("product_id", dto.getId());
 			productImgMapper.delete(ew);
-
 			List<String> imags = dto.getImgs();
 			ProductImags pi = null;
 			for (String img : imags) {
@@ -94,6 +93,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 					zmenu = new LinkedHashMap<>();
 					zmenu.put("typeId", t.getId());
 					zmenu.put("title", t.getName());
+					zmenu.put("logo", t.getLogo());
+					zmenu.put("imgurl", t.getImgurl());
 					if ("集".equals(t.getName())) {
 						// 特殊处理
 						List<ItemVo> items = getProduct(baseList, t.getId());
@@ -101,8 +102,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 						zmenu.put("list", map);
 					} else {
 						zmenu.put("list", getProduct(baseList, t.getId()));
-					}
-					zmenu.put("imgurl", t.getImgurl());
+					}			
 					myMenu.put("list" + (i + 1), zmenu);
 				}
 
