@@ -93,7 +93,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 					zmenu = new LinkedHashMap<>();
 					zmenu.put("typeId", t.getId());
 					zmenu.put("title", t.getName());
-					zmenu.put("logo", t.getLogo());
+//					zmenu.put("logo", t.getLogo());
 					zmenu.put("imgurl", t.getImgurl());
 					if ("集".equals(t.getName())) {
 						// 特殊处理
@@ -109,7 +109,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 			} else if (types.size() == 1) {
 				Type t = types.get(0);
 				myMenu.put("typeId", t.getId());
-				myMenu.put("logo", t.getLogo());
+//				myMenu.put("logo", t.getLogo());
 				myMenu.put("imgurl", t.getImgurl());
 				// 如果是观
 				if ("观".equals(u.getTitle())) {

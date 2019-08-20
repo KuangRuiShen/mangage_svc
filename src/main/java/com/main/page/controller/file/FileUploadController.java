@@ -62,9 +62,8 @@ public class FileUploadController {
 	public String image(@RequestParam MultipartFile file, HttpServletRequest request) {
 		String path = "";
 		if (!file.isEmpty()) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			Date date = new java.util.Date();
-			String strDate = sdf.format(date);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMss");
+			String strDate = sdf.format(System.currentTimeMillis());
 			String fileName = strDate + new Random().nextInt(1000) + file.getOriginalFilename()
 					.substring(file.getOriginalFilename().indexOf("."), file.getOriginalFilename().length());
 			// String realPath =
