@@ -21,6 +21,8 @@ public class Product {
 	
 	private String imgurl;//主题图片
 	
+	private String roundurl;//轮播图
+	
 	private String videourl;//文件url
 	
 	private String remark;//文字说明
@@ -99,5 +101,15 @@ public class Product {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+
+	public String getRoundurl() {
+		return roundurl;
+	}
+
+	public void setRoundurl(String roundurl) {
+		this.roundurl = roundurl;
+	}
+	
+	
 
 }
