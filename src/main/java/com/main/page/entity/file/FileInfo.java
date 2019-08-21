@@ -3,6 +3,7 @@ package com.main.page.entity.file;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
@@ -13,6 +14,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 @TableName("file")
 public class FileInfo {
 
+	@TableId
 	private String id;
 	
 	@TableField("file_url")

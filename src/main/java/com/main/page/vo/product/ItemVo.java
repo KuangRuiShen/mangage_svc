@@ -9,6 +9,8 @@ public class ItemVo {
 	private String imgurl;
 	
 	private String year;
+	
+	private String roundurl;
 
 	public Integer getId() {
 		return id;
@@ -50,6 +52,14 @@ public class ItemVo {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public String getRoundurl() {
+		return roundurl;
+	}
+
+	public void setRoundurl(String roundurl) {
+		this.roundurl = roundurl;
 	}
 	
 

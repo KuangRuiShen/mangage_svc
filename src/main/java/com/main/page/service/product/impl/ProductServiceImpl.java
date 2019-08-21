@@ -153,6 +153,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 			i.setId(item.getId());
 			i.setTitle(item.getTitle());
 			i.setImgurl(item.getImgurl());
+			i.setRoundurl(item.getRoundurl());
 			i.setYear(item.getYear() + "");
 			return i;
 		}).collect(Collectors.toList());

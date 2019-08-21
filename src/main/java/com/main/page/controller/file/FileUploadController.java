@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
@@ -140,7 +139,7 @@ public class FileUploadController {
 					// 保存
 					String fileUrl = "http://" + ip + "/upload/video/" + newFilename;
 					FileInfo fileInfo = new FileInfo(id, fileUrl);
-					fileService.insert(fileInfo);
+					fileService.insertOrUpdate(fileInfo);
 					//删除
 					MyFileUtil.delFolder(realpath + "/upload/video/tmp/" + id + "/");
 					
@@ -159,8 +158,7 @@ public class FileUploadController {
 				String path = "http://" + ip + "/upload/video/" + fileName;
 				// 保存
 				FileInfo fileInfo = new FileInfo(id, path);
-				fileService.insert(fileInfo);
-
+				fileService.insertOrUpdate(fileInfo);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
